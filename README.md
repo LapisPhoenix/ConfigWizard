@@ -2,7 +2,7 @@
 
 configwizard is a Python package for handling configuration files. It provides a `Config` class that allows you to easily create, read, update, and delete configuration files in different formats such as JSON and TOML.
 
-# [Changelog](./Changelog.md)
+# [Changelog](https://github.com/LapisPhoenix/ConfigWizard/blob/main/Changelog.md)
 
 ## Installation
 
@@ -22,7 +22,7 @@ from configwizard import Config
 config = Config('config', 'json')
 
 # Add content to the configuration file
-config.add_content({'key': 'value'})
+config._add_content({'key': 'value'})
 
 # Get the contents of the configuration file
 contents = config.get_content()

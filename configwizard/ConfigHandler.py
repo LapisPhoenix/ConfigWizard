@@ -61,7 +61,7 @@ class Config:
             os.makedirs(self.default_directory)
 
         if not os.path.exists(self.file_path):
-            self.add_content({})
+            self._add_content({})
 
     def _check_file_type(self):
         if '.' not in self.file_type:
@@ -69,7 +69,7 @@ class Config:
 
             self.file_type = new
 
-    def add_content(self, contents):
+    def _add_content(self, contents):
         """
         Add contents to the configuration file.
 
@@ -134,7 +134,7 @@ class Config:
             if value in file_contents:
                 del file_contents[value]
 
-        self.add_content(file_contents)
+        self._add_content(file_contents)
 
     def update_content(self, new_values: dict, remove_values: list = None):
         """
@@ -162,7 +162,7 @@ class Config:
                 json.dump(file_contents, f, indent=2)
             elif self.file_type == '.toml':
                 file_contents.update(new_values)
-                self.add_content(file_contents)
+                self._add_content(file_contents)
 
         if remove_values:
             self.remove_content(remove_values)
@@ -210,3 +210,38 @@ class Config:
                 contents = contents.hex().upper()
 
             return contents
+
+    def decode_config(self, string, type_of_encoding: str):
+        """
+        Decode the configuration file in memory.
+
+        Args:
+            type_of_encoding (str): The type of codec to use to decode the configuration file.
+                                    Must be one of the following: 'base64', 'hex', 'base32', 'base16'
+
+        Returns:
+            The decode configuration file in memory.
+
+        """
+
+        accepted_types = ['base64', 'hex', 'base32', 'base16']
+        decoded_contents = "{}"
+
+        if type_of_encoding.casefold() not in accepted_types:
+            raise ValueError(f"Encoding type must be one of the following: {', '.join(accepted_types)}")
+
+        if type_of_encoding == 'base64':
+            decoded_contents = base64.b64decode(string).decode('utf-8').strip()
+        elif type_of_encoding == 'hex':
+            decoded_contents = binascii.unhexlify(string).decode('utf-8').strip()
+        elif type_of_encoding == 'base32':
+            decoded_contents = base64.b32decode(string).decode('utf-8').strip()
+        elif type_of_encoding == 'base16':
+            decoded_contents = binascii.unhexlify(string).decode('utf-8').strip()
+
+        if self.file_type == '.toml':
+            decoded_contents = tomllib.loads(decoded_contents)
+        elif self.file_type == '.json':
+            decoded_contents = json.loads(decoded_contents)
+
+        return decoded_contents
