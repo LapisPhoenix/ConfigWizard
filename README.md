@@ -16,13 +16,13 @@ pip install configwizard
 Here's an example of how to use configwizard:
 
 ```python
-from configwizard import Config
+from configwizard import ConfigHandler
 
 # Create a new configuration file
-config = Config('config', 'json')
+config = ConfigHandler.Config('config', 'json')
 
 # Add content to the configuration file
-config._add_content({'key': 'value'})
+config.update_content({'key': 'value'})
 
 # Get the contents of the configuration file
 contents = config.get_content()
