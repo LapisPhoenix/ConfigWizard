@@ -2,6 +2,8 @@
 
 configwizard is a Python package for handling configuration files. It provides a `Config` class that allows you to easily create, read, update, and delete configuration files in different formats such as JSON and TOML.
 
+# [Changelog](./Changelog.md)
+
 ## Installation
 
 You can install configwizard using pip:
