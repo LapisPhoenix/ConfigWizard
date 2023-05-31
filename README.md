@@ -1,20 +1,20 @@
-# pyconfighandler
+# configwizard
 
-pyconfighandler is a Python package for handling configuration files. It provides a `Config` class that allows you to easily create, read, update, and delete configuration files in different formats such as JSON and TOML.
+configwizard is a Python package for handling configuration files. It provides a `Config` class that allows you to easily create, read, update, and delete configuration files in different formats such as JSON and TOML.
 
 ## Installation
 
-You can install pyconfighandler using pip:
+You can install configwizard using pip:
 
 ```bash
-pip install pyconfighandler
+pip install configwizard
 ```
 
 ## Usage
-Here's an example of how to use pyconfighandler:
+Here's an example of how to use configwizard:
 
 ```python
-from pyconfighandler import Config
+from configwizard import Config
 
 # Create a new configuration file
 config = Config('config', 'json')
@@ -41,7 +41,7 @@ In the example above, we create a Config instance with a file name of 'config' a
 
 ## Supported File Types
 
-pyconfighandler supports the following file types for configuration files:
+configwizard supports the following file types for configuration files:
 
 - JSON (.json)
 - TOML (.toml)
